@@ -1,0 +1,13 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Riskviza mark</title>
+  <desc id="desc">Connected Riskviza mark for product UI and social usage.</desc>
+  <rect width="256" height="256" rx="64" fill="#071B2C"/>
+  <path d="M70 184V72h60.1c38.8 0 62.7 20.6 62.7 52.8 0 21.9-11.3 38.5-30.4 46.7L202 184h-47.2l-33.9-55.3h-12V184H70Z" fill="#F8FAF8"/>
+  <path d="M109 101.6V148h19.7c15 0 24-8.9 24-23.2 0-14.5-9.2-23.2-24.3-23.2H109Z" fill="#071B2C"/>
+  <path d="M115 149 175.2 71.4" stroke="#38D5B5" stroke-width="12" stroke-linecap="round"/>
+  <path d="M72 72H184V184H72V72Z" stroke="#173248" stroke-width="2" stroke-dasharray="8 10"/>
+  <circle cx="72" cy="72" r="14" fill="#38D5B5"/>
+  <circle cx="184" cy="72" r="14" fill="#B870FF"/>
+  <circle cx="184" cy="184" r="14" fill="#38D5B5"/>
+  <circle cx="72" cy="184" r="14" fill="#F5B84B"/>
+</svg>

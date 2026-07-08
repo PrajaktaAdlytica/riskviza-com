@@ -1,0 +1,24 @@
+:root {
+  --rvz-ink: #071b2c;
+  --rvz-ink-2: #173248;
+  --rvz-slate: #5c6b78;
+  --rvz-muted: #87949d;
+  --rvz-paper: #f8faf8;
+  --rvz-mist: #eef4f2;
+  --rvz-line: #dbe5e2;
+  --rvz-teal: #38d5b5;
+  --rvz-teal-dark: #0d9b87;
+  --rvz-violet: #7c3df2;
+  --rvz-violet-soft: #efe7ff;
+  --rvz-amber: #f5b84b;
+  --rvz-danger: #e94f4f;
+  --rvz-success: #20c878;
+  --rvz-radius-xs: 6px;
+  --rvz-radius-sm: 8px;
+  --rvz-radius-md: 14px;
+  --rvz-radius-lg: 22px;
+  --rvz-shadow-soft: 0 18px 52px rgba(7, 27, 44, 0.12);
+  --rvz-shadow-card: 0 10px 28px rgba(7, 27, 44, 0.08);
+  --rvz-font-sans: "Inter", "Manrope", Arial, sans-serif;
+  --rvz-font-display: "Manrope", "Inter", Arial, sans-serif;
+}
