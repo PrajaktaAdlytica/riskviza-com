@@ -5,27 +5,25 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowRight,
   BarChart3,
-  BellDot,
   BookOpenCheck,
   Building2,
+  CalendarDays,
   Check,
   ChevronDown,
   CircleDot,
   ClipboardCheck,
-  Clock3,
   DatabaseZap,
+  ExternalLink,
   FileCheck2,
-  Fingerprint,
-  Github,
   Globe2,
   Layers3,
   Linkedin,
   LineChart,
   Network,
+  Newspaper,
   Radar,
   ScanLine,
   Sparkles,
-  Twitter,
   UsersRound,
 } from "lucide-react";
 import { siBox, siDatadog, siGooglecloud, siJira, siOkta, siSnowflake } from "simple-icons";
@@ -60,6 +58,16 @@ const navGroups = [
     ],
   },
 ];
+
+const fundingAnnouncement = {
+  date: "Jan 15, 2026",
+  dateTime: "2026-01-15",
+  title: "Riskviza secures $545K in funding from Dlabs.",
+  description: "Riskviza is part of Dlabs’ global portfolio of companies building cyber-risk intelligence for complex operating environments.",
+  dlabsUrl: "https://d-labs-site.vercel.app/companies",
+  linkedInUrl: "https://www.linkedin.com/company/riskvisa/",
+  crunchbaseUrl: "https://www.crunchbase.com/organization/riskviza",
+};
 
 const logoPartners = [
   { label: "AWS", mark: "aws", color: "#ff9900" },
@@ -380,6 +388,9 @@ function Header({ navigate }) {
           <AppLink href="/company" navigate={navigate} className="nav-link">
             Company
           </AppLink>
+          <AppLink href="/news/funding-announcement" navigate={navigate} className="nav-link">
+            News
+          </AppLink>
         </nav>
         <div className="nav-actions">
           <AppLink href="/signin" navigate={navigate} className="ghost-button">
@@ -396,7 +407,7 @@ function Header({ navigate }) {
       </div>
       {mobile && (
         <div className="mobile-menu">
-          {[["Platform", "/platform"], ...navGroups.flatMap((g) => g.items), ["Company", "/company"], ["Request demo", "/demo"]].map(
+          {[["Platform", "/platform"], ...navGroups.flatMap((g) => g.items), ["Company", "/company"], ["News", "/news/funding-announcement"], ["Request demo", "/demo"]].map(
             ([label, href]) => (
               <AppLink key={label} href={href} navigate={(url) => { setMobile(false); navigate(url); }} className="mobile-link">
                 {label}
@@ -467,7 +478,7 @@ function HeroDashboard() {
       <div className="dashboard-top">
         <div>
           <span className="ui-kicker">Board risk pack</span>
-          <h3>July risk committee</h3>
+          <h3>January risk committee</h3>
         </div>
         <span className="status-pill ok">Evidence confidence 91%</span>
       </div>
@@ -586,6 +597,7 @@ function HomePage({ navigate }) {
       <TrustStrip />
       <PainExplorer />
       <ProductModules navigate={navigate} />
+      <FundingAnnouncement navigate={navigate} />
       <SolutionsPreview navigate={navigate} />
       <StatsSection />
       <FrameworkMapper />
@@ -594,6 +606,34 @@ function HomePage({ navigate }) {
       <PricingSection navigate={navigate} />
       <DemoBand navigate={navigate} />
     </>
+  );
+}
+
+function FundingAnnouncement({ navigate }) {
+  return (
+    <section className="funding-announcement reveal" aria-labelledby="funding-announcement-title">
+      <div className="funding-mark" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="funding-content">
+        <div className="funding-meta">
+          <span className="eyebrow">Funding announcement</span>
+          <time dateTime={fundingAnnouncement.dateTime}><CalendarDays size={15} /> {fundingAnnouncement.date}</time>
+        </div>
+        <h2 id="funding-announcement-title">{fundingAnnouncement.title}</h2>
+        <p>{fundingAnnouncement.description}</p>
+      </div>
+      <div className="funding-actions">
+        <a className="secondary-button funding-external" href={fundingAnnouncement.dlabsUrl} target="_blank" rel="noreferrer noopener">
+          View Dlabs portfolio <ExternalLink size={16} />
+        </a>
+        <AppLink href="/news/funding-announcement" navigate={navigate} className="funding-read-link">
+          Read announcement <ArrowRight size={16} />
+        </AppLink>
+      </div>
+    </section>
   );
 }
 
@@ -945,7 +985,7 @@ function BoardSection() {
       <div className="board-dashboard reveal scroll-lift">
         <div className="board-window-top">
           <div className="window-dots"><i /><i /><i /></div>
-          <span>riskviza.app / board-pack / july-2026</span>
+          <span>riskviza.app / board-pack / jan-2026</span>
           <b>Live</b>
         </div>
         <div className="board-app">
@@ -1474,6 +1514,49 @@ function CompanyPage() {
           <p>Ewa Zielinska, Insurance Partnerships</p>
         </div>
       </section>
+      <CredibilityRecord />
+    </main>
+  );
+}
+
+function CredibilityRecord() {
+  return (
+    <section className="section credibility-section reveal" aria-labelledby="credibility-title">
+      <div>
+        <span className="eyebrow">Company record</span>
+        <h2 id="credibility-title">Backed by Dlabs</h2>
+        <p>$545K funding</p>
+      </div>
+      <div className="credibility-links">
+        <a href={fundingAnnouncement.dlabsUrl} target="_blank" rel="noreferrer noopener">Dlabs portfolio <ExternalLink size={15} /></a>
+        <a href={fundingAnnouncement.linkedInUrl} target="_blank" rel="noreferrer noopener">LinkedIn <ExternalLink size={15} /></a>
+        <a href={fundingAnnouncement.crunchbaseUrl} target="_blank" rel="noreferrer noopener">Crunchbase <ExternalLink size={15} /></a>
+      </div>
+    </section>
+  );
+}
+
+function FundingArticlePage({ navigate }) {
+  return (
+    <main className="subpage funding-page">
+      <section className="funding-article-hero">
+        <div className="article-badge"><Newspaper size={17} /> Funding announcement</div>
+        <time dateTime={fundingAnnouncement.dateTime}>{fundingAnnouncement.date}</time>
+        <h1>{fundingAnnouncement.title}</h1>
+        <p>{fundingAnnouncement.description}</p>
+      </section>
+      <article className="funding-article-body reveal">
+        <div className="article-rule" aria-hidden="true" />
+        <p>
+          Riskviza has secured $545K in funding from Dlabs. The company is part of Dlabs’ global portfolio of companies building cyber-risk intelligence for complex operating environments.
+        </p>
+        <div className="article-actions">
+          <a className="primary-button" href={fundingAnnouncement.dlabsUrl} target="_blank" rel="noreferrer noopener">
+            View Dlabs portfolio <ExternalLink size={17} />
+          </a>
+          <AppLink href="/demo" navigate={navigate} className="secondary-button">Request a demo</AppLink>
+        </div>
+      </article>
     </main>
   );
 }
@@ -1548,9 +1631,9 @@ function Footer({ navigate }) {
         <Logo reverse navigate={navigate} />
         <p>Board-ready risk intelligence for EU-regulated teams.</p>
         <div className="social-links">
-          <button aria-label="LinkedIn"><Linkedin size={18} /></button>
-          <button aria-label="X"><Twitter size={18} /></button>
-          <button aria-label="GitHub"><Github size={18} /></button>
+          <a href={fundingAnnouncement.linkedInUrl} target="_blank" rel="noreferrer noopener" aria-label="Riskviza on LinkedIn"><Linkedin size={18} /></a>
+          <a href={fundingAnnouncement.crunchbaseUrl} target="_blank" rel="noreferrer noopener" aria-label="Riskviza on Crunchbase"><CircleDot size={18} /></a>
+          <a href={fundingAnnouncement.dlabsUrl} target="_blank" rel="noreferrer noopener" aria-label="Dlabs portfolio"><Globe2 size={18} /></a>
         </div>
       </div>
       <div className="footer-links">
@@ -1563,12 +1646,14 @@ function Footer({ navigate }) {
         <div>
           <h4>Company</h4>
           <AppLink href="/company" navigate={navigate}>About</AppLink>
+          <AppLink href="/news/funding-announcement" navigate={navigate}>Funding announcement</AppLink>
           <AppLink href="/resources" navigate={navigate}>Resources</AppLink>
           <AppLink href="/demo" navigate={navigate}>Request demo</AppLink>
         </div>
         <div>
-          <h4>Warsaw</h4>
-          <p>Riskviza sp. z o.o.<br />ul. Prosta 20<br />00-850 Warszawa, Poland</p>
+          <h4>Credibility</h4>
+          <p>Backed by Dlabs<br />$545K funding</p>
+          <a className="footer-external" href={fundingAnnouncement.dlabsUrl} target="_blank" rel="noreferrer noopener">Dlabs portfolio <ExternalLink size={13} /></a>
         </div>
       </div>
     </footer>
@@ -1587,6 +1672,7 @@ function App() {
     if (path.startsWith("/solutions")) return <SolutionsPage />;
     if (path.startsWith("/resources")) return <ResourcesPage />;
     if (path.startsWith("/company")) return <CompanyPage />;
+    if (path.startsWith("/news/funding-announcement")) return <FundingArticlePage navigate={navigate} />;
     if (path.startsWith("/signin")) return <SignInPage navigate={navigate} />;
     if (path.startsWith("/demo")) return <DemoPage navigate={navigate} />;
     return <HomePage navigate={navigate} />;
@@ -1594,10 +1680,34 @@ function App() {
 
   return (
     <>
+      <RouteMetadata path={path} />
       {!path.startsWith("/signin") && !path.startsWith("/demo") && <Header navigate={navigate} />}
       {page}
       <Footer navigate={navigate} />
     </>
+  );
+}
+
+function RouteMetadata({ path }) {
+  useEffect(() => {
+    const isFundingArticle = path.startsWith("/news/funding-announcement");
+    const description = isFundingArticle
+      ? "Riskviza has secured $545K in funding from Dlabs. Announcement dated Jan 15, 2026."
+      : "Riskviza unifies cyber, vendor, AI, ESG, and operational risk into board-ready risk intelligence for EU-regulated teams.";
+    document.title = isFundingArticle ? "Riskviza secures $545K in funding from Dlabs. | Riskviza" : "Riskviza | Board-ready risk intelligence for EU teams";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", description);
+  }, [path]);
+
+  return (
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "Riskviza",
+        url: "https://riskviza.com",
+        sameAs: [fundingAnnouncement.linkedInUrl, fundingAnnouncement.crunchbaseUrl],
+      })}
+    </script>
   );
 }
 
