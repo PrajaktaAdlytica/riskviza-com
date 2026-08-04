@@ -1915,6 +1915,27 @@ p {
 
 .funding-read-link:hover { color: var(--ink); }
 
+.funding-profile-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.funding-profile-links a,
+.article-source-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  transition: color 180ms var(--ease);
+}
+
+.funding-profile-links a:hover,
+.article-source-links a:hover { color: var(--teal-dark); }
+
 .funding-page::before {
   content: "";
   position: absolute;
@@ -1994,6 +2015,23 @@ p {
 }
 
 .article-actions a { text-decoration: none; }
+
+.article-source-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.article-source-links span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+  text-transform: uppercase;
+}
 
 .credibility-section {
   margin-bottom: 82px;
@@ -3502,6 +3540,7 @@ select:focus {
   .funding-content h2 { font-size: 31px; }
   .funding-actions { min-width: 0; }
   .funding-read-link { justify-content: flex-start; padding-left: 10px; }
+  .funding-profile-links { justify-content: flex-start; padding-left: 10px; }
 
   .funding-article-hero {
     width: min(100% - 28px, 920px);

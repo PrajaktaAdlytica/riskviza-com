@@ -632,6 +632,10 @@ function FundingAnnouncement({ navigate }) {
         <AppLink href="/news/funding-announcement" navigate={navigate} className="funding-read-link">
           Read announcement <ArrowRight size={16} />
         </AppLink>
+        <div className="funding-profile-links" aria-label="Riskviza company profiles">
+          <a href={fundingAnnouncement.linkedInUrl} target="_blank" rel="noreferrer noopener">LinkedIn <ExternalLink size={13} /></a>
+          <a href={fundingAnnouncement.crunchbaseUrl} target="_blank" rel="noreferrer noopener">Crunchbase <ExternalLink size={13} /></a>
+        </div>
       </div>
     </section>
   );
@@ -1555,6 +1559,11 @@ function FundingArticlePage({ navigate }) {
             View Dlabs portfolio <ExternalLink size={17} />
           </a>
           <AppLink href="/demo" navigate={navigate} className="secondary-button">Request a demo</AppLink>
+        </div>
+        <div className="article-source-links" aria-label="Riskviza company profiles">
+          <span>Company profiles</span>
+          <a href={fundingAnnouncement.linkedInUrl} target="_blank" rel="noreferrer noopener">LinkedIn <ExternalLink size={14} /></a>
+          <a href={fundingAnnouncement.crunchbaseUrl} target="_blank" rel="noreferrer noopener">Crunchbase <ExternalLink size={14} /></a>
         </div>
       </article>
     </main>
