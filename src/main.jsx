@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowRight,
+  ArrowDown,
   BarChart3,
   BookOpenCheck,
   Building2,
@@ -360,11 +361,23 @@ function AppLink({ href, children, navigate, className = "" }) {
   );
 }
 
-function Header({ navigate }) {
+function Header({ navigate, entryMode = false }) {
   const [mobile, setMobile] = useState(false);
+  const [overEntry, setOverEntry] = useState(entryMode);
+
+  useEffect(() => {
+    if (!entryMode) {
+      setOverEntry(false);
+      return undefined;
+    }
+    const updateHeader = () => setOverEntry(window.scrollY < window.innerHeight * 0.72);
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    return () => window.removeEventListener("scroll", updateHeader);
+  }, [entryMode]);
 
   return (
-    <header className="site-header">
+    <header className={`site-header ${entryMode ? "site-header-home" : ""} ${overEntry ? "site-header-entry" : ""}`}>
       <div className="nav-shell">
         <Logo navigate={navigate} />
         <nav className="desktop-nav" aria-label="Primary navigation">
@@ -417,6 +430,105 @@ function Header({ navigate }) {
         </div>
       )}
     </header>
+  );
+}
+
+function EntryExperience({ navigate }) {
+  const sectionRef = useRef(null);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const video = videoRef.current;
+    if (!section || !video) return undefined;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) video.pause();
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".entry-reveal",
+        { y: 34, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.25, stagger: 0.11, ease: "power3.out", delay: 0.2 },
+      );
+      gsap.fromTo(
+        ".entry-domain",
+        { opacity: 0, x: -12 },
+        { opacity: 1, x: 0, duration: 0.8, stagger: 0.08, ease: "power2.out", delay: 0.85 },
+      );
+
+      if (!reducedMotion) {
+        gsap.to(video, {
+          scale: 1.08,
+          yPercent: 7,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.9,
+          },
+        });
+        gsap.to(".entry-content", {
+          yPercent: -14,
+          opacity: 0.22,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "45% top",
+            end: "bottom top",
+            scrub: 0.8,
+          },
+        });
+      }
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
+  const enterSite = () => document.querySelector("#current-home")?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  return (
+    <section className="entry-experience" ref={sectionRef} aria-labelledby="entry-title">
+      <video
+        ref={videoRef}
+        className="entry-video"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source src="/media/riskviza-warsaw-night.mp4" type="video/mp4" />
+      </video>
+      <div className="entry-scrim" aria-hidden="true" />
+      <div className="entry-frame" aria-hidden="true" />
+
+      <div className="entry-meta entry-reveal" aria-label="Live risk intelligence context">
+        <span><i /> Risk signal / live</span>
+        <span>Warsaw / European Union</span>
+      </div>
+
+      <div className="entry-content">
+        <span className="entry-kicker entry-reveal">EU-native risk intelligence</span>
+        <h1 id="entry-title" className="entry-reveal">
+          See risk <em>before</em><br />it reaches the board.
+        </h1>
+        <button className="entry-cta entry-reveal" onClick={enterSite}>
+          Enter Riskviza <ArrowDown size={18} />
+        </button>
+      </div>
+
+      <div className="entry-domains" aria-label="Connected risk domains">
+        {["Cyber", "Vendor", "AI", "ESG", "Operational"].map((domain, index) => (
+          <span className="entry-domain" key={domain}>
+            <b>{String(index + 1).padStart(2, "0")}</b>
+            {domain}
+          </span>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -566,7 +678,8 @@ function Donut({ value, color, label }) {
 function HomePage({ navigate }) {
   return (
     <>
-      <section className="hero-section">
+      <EntryExperience navigate={navigate} />
+      <section className="hero-section" id="current-home">
         <RiskSignalCanvas />
         <div className="hero-inner">
           <div className="hero-copy reveal">
@@ -1690,7 +1803,7 @@ function App() {
   return (
     <>
       <RouteMetadata path={path} />
-      {!path.startsWith("/signin") && !path.startsWith("/demo") && <Header navigate={navigate} />}
+      {!path.startsWith("/signin") && !path.startsWith("/demo") && <Header navigate={navigate} entryMode={path === "/" || path === ""} />}
       {page}
       <Footer navigate={navigate} />
     </>
