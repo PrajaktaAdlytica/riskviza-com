@@ -1775,6 +1775,8 @@ function Footer({ navigate }) {
         <div>
           <h4>Credibility</h4>
           <p>Backed by Dlabs<br />$545K funding</p>
+          <p>1486 Station Way<br />Nicosia, NIC 1075<br />Cyprus</p>
+          <p>Phone: 68 810567</p>
           <a className="footer-external" href={fundingAnnouncement.dlabsUrl} target="_blank" rel="noreferrer noopener">Dlabs portfolio <ExternalLink size={13} /></a>
         </div>
       </div>
