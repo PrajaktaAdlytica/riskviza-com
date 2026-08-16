@@ -507,7 +507,7 @@ function EntryExperience({ navigate }) {
 
       <div className="entry-meta entry-reveal" aria-label="Live risk intelligence context">
         <span><i /> Risk signal / live</span>
-        <span>Warsaw / European Union</span>
+        <span>Nicosia / Cyprus</span>
       </div>
 
       <div className="entry-content">
@@ -699,7 +699,7 @@ function HomePage({ navigate }) {
               </AppLink>
             </div>
             <div className="hero-proof">
-              <span>Warsaw built</span>
+              <span>Cyprus based</span>
               <span>NIS2 + DORA ready</span>
               <span>Board pack first</span>
             </div>
@@ -1614,14 +1614,14 @@ function CompanyPage() {
     <main className="subpage company-page">
       <SubHero
         eyebrow="Company"
-        title="Built in Warsaw for EU risk teams that need calmer board conversations."
-        body="Riskviza is a Poland-based product company focused on the operating layer between risk, compliance, evidence, vendors, and boards."
+        title="Built for EU risk teams that need calmer board conversations."
+        body="Riskviza is a Cyprus-based product company focused on the operating layer between risk, compliance, evidence, vendors, and boards."
       />
       <section className="section company-grid">
         <div className="company-card reveal">
-          <h3>Riskviza sp. z o.o.</h3>
-          <p>ul. Prosta 20, 00-850 Warszawa, Poland</p>
-          <p>NIP 525-000-84-12</p>
+          <h3>Riskviza</h3>
+          <p>1486 Station Way, Nicosia, NIC 1075, Cyprus</p>
+          <p>Phone: 68 810567</p>
           <p>hello@riskviza.com</p>
         </div>
         <div className="company-card reveal">
